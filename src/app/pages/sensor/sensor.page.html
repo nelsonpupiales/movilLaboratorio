@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-back-button color=#ffffff></ion-back-button>
+    </ion-buttons>
+    <ion-title class="titulo">
+      Sensor
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  
+
+    <!--<ion-datetime  [value]="today"></ion-datetime>-->
+    <ion-card>
+      <p class="tituloPregunta" [innerHTML]="nombreExperimento"></p>
+      <p class="pregunta" [innerHTML]="preguntaExperimento"></p>
+      
+      <br>
+    </ion-card>
+
+    <ion-card>
+      <ion-button  color="warning" (click)="cargarDatos()">Cargar datos</ion-button>
+      <canvas #lineCanvas style="position: relative; height:20vh; width:40vw"></canvas>
+    </ion-card>
+
+
+
+
+  <ion-footer class="botonResponder">
+    <!--<ion-button color="success">Sensor</ion-button>-->
+    <ion-button  color="warning" (click)="addRespuesta()">Responder</ion-button>
+  </ion-footer>
+  br
+
+</ion-content>

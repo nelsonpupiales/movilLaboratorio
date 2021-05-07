@@ -1,0 +1,83 @@
+<!--<pre>{{ materias | json}}</pre>
+<ion-header >
+  <ion-toolbar >
+    <ion-row>
+      <ion-title class="titulo">
+        Materias
+      </ion-title>
+      <ion-icon class="botonSalida" name="exit-outline" (click)="logout()"></ion-icon>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+-->
+
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="Pull to refresh"
+      refreshingSpinner="circles" refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <div class="bloque">
+    <br>
+    <ion-row>
+      <ion-title class="titulo">
+        Laboratorio
+      </ion-title>
+      <ion-icon class="botonSalida" name="exit-outline" (click)="logout()"></ion-icon>
+    </ion-row>
+    <br>
+    <p class="saludo">Hola, {{nombreEstudiante}}</p>
+    <br>
+  </div>
+
+  <p class="tema">Materia</p>
+  <p *ngFor="let materia of materias">    
+      <ion-card class="card" routerLink="/tema/{{materia[0].id}}">
+        <br>
+        <p>{{materia[0].nombreMateria}}</p>
+      </ion-card>
+  </p>
+
+
+
+
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="cargar">
+    <ion-fab-button>
+      <ion-icon name="add" (click)="addMateria()"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
+
+<ion-footer class="pie">
+  <br>
+  <div class="row">
+    <div class="col-xs">
+      <div class="box">
+        <button ion-button class="botonpie">
+          <ion-icon name="easel-outline"></ion-icon>
+          <ion-label><br>Información</ion-label>
+        </button>
+      </div>
+    </div>
+    <div class="col-xs">
+      <div class="box">
+        <button ion-button (click)="sensor()" class="botonpie">
+          <ion-icon name="settings-outline"></ion-icon>
+          <ion-label><br>Sensor</ion-label>
+        </button>
+      </div>
+    </div>
+    <div class="col-xs">
+      <div class="box">
+        <button ion-button (click)="profile()" class="botonpie">
+          <ion-icon name="person-circle-outline"></ion-icon>
+          <ion-label><br>Perfil</ion-label>
+        </button>
+      </div>
+    </div>
+  </div>
+</ion-footer>

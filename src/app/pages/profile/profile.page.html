@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-back-button color="white"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="titulo">Perfil </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      
+      <ion-card-title class="titulo">Datos personales del Estudiante</ion-card-title>
+      <br>
+             
+        <ion-icon class="icono" name="person"></ion-icon>        
+      
+      <!--<ion-card-subtitle>Hola, {{nombreEstudiante}}</ion-card-subtitle>-->
+
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label>
+          Nombre: {{nombreEstudiante}}
+        </ion-label>        
+      </ion-item>
+    </ion-card-content>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label>
+          Apellido: {{apellidoEstudiante}}
+        </ion-label>        
+      </ion-item>
+    </ion-card-content>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label>
+          Correo: {{correoEstudiante}}
+        </ion-label>
+       
+      </ion-item>
+    </ion-card-content>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label>
+          Usuario: {{usuarioEstudiante}}
+        </ion-label>
+      </ion-item>
+    </ion-card-content>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label>
+          Pass: {{passEstudiante}}
+        </ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<!--
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="dashboard">
+      <ion-icon name="easel-outline" (click)="materia()"></ion-icon>
+      <ion-label>Materia</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+-->

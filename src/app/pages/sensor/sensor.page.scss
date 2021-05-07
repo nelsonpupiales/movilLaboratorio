@@ -1,0 +1,39 @@
+ion-toolbar {
+    --color: #ffffff;
+    --background: #0d2c6c;
+    border-bottom: 4px solid  rgb(240, 226, 31);
+}
+
+
+ion-content{
+    --color: #ffffff;
+    --background: #fafafa;
+}
+
+
+ion-card{
+    --background: #eeeeee !important;
+}
+
+.titulo{
+    text-align: left;
+}
+
+
+.tituloPregunta{
+    text-align: center;
+    font-size: 1.2em;
+
+}
+.pregunta{
+    font-size: 0.9em;
+    margin-left: 0.6em;
+    margin-right: 0.6em;
+    //color: #000000;
+    //background: rgb(221, 217, 217) ;
+}
+
+.botonResponder{
+    text-align: center;
+}
+

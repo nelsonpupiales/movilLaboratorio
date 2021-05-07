@@ -1,0 +1,30 @@
+ion-toolbar {
+    --color: #ffffff;
+    --background: #0d2c6c;
+    border-bottom: 4px solid  rgb(240, 226, 31);
+}
+
+
+ion-content{
+    --color: #ffffff;
+    --background: #fafafa;
+}
+
+
+ion-card{
+    --background: #eeeeee !important;
+    text-align: justify;
+    margin-left: 0.6em;
+    margin-right: 0.6em;
+}
+
+.titulo{
+    text-align: left;
+}
+
+.texto{
+    margin-left: 0.6em;
+    margin-right: 0.6em;
+    text-align: justify;
+}
+

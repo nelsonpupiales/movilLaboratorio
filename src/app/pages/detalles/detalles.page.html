@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-back-button color=#ffffff></ion-back-button>
+    </ion-buttons>
+    <ion-title class="titulo">{{nombreTema}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <!--
+  <ion-button color="warning" expand="block" routerLink="/experimento/{{idTema}}">Experimentos</ion-button>
+  -->
+
+  <ion-card >
+    <h5 class="tituloTexto">Introducción </h5>
+    <p class="texto" [innerHTML]="introduccionTema"></p>
+  </ion-card>
+
+  <ion-card >
+    <h5 class="tituloTexto">Instrucciones </h5>
+    <p class="texto" [innerHTML]="instruccionesTema"></p>
+    <br>
+  </ion-card>
+  <ion-card >
+    <h5 class="tituloTexto">Bibliografia </h5>
+    <p class="texto" [innerHTML]="bibliografiaTema"></p>
+    <br>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-button color="warning" expand="block" routerLink="/experimento/{{idTema}}">Experimentos</ion-button>
+</ion-footer>
+
+<!--
+<ion-footer class="pie">
+  <br>
+  <div class="row">
+    <div class="col-xs">
+      <div class="box">
+        <button ion-button class="botonpie" routerLink="/experimento/{{idTema}}">
+          <ion-icon name="barcode"></ion-icon>
+          <ion-label><br>Experimentos</ion-label>
+        </button>
+      </div>
+    </div>
+    <div class="col-xs">
+      <div class="box">
+        <button ion-button class="botonpie" routerLink="/practicas/{{idTema}}">
+          <ion-icon name="folder"></ion-icon>
+          <ion-label><br>Mis Practicas</ion-label>
+        </button>
+      </div>
+    </div>
+  </div>
+</ion-footer>
+-->
+
+
+
+
+
+
+
+

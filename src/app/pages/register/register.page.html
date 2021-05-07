@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-back-button color="white"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="titulo">Registro de estudiante </ion-title>
+  </ion-toolbar>
+</ion-header>
+<br>
+<ion-icon class="icono" name="person"></ion-icon>
+<p class="texto">Llene todos los campos para poder registrarse...</p>
+
+<ion-card-content padding>
+  <form>
+    <ion-list>
+      <ion-item lines="full">
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input type="text" #nombreEstudiante required></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Apellido</ion-label>
+        <ion-input type="text" #apellidoEstudiante required></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Correo</ion-label>
+        <ion-input type="text" #correoEstudiante required></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Usuario</ion-label>
+        <ion-input type="text" #usuarioEstudiante required></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" #passEstudiante required></ion-input>
+      </ion-item>
+      <br>
+      <ion-button expand="full" share="round" color="secondary"
+        (click)="procesoRegistro(nombreEstudiante, apellidoEstudiante, correoEstudiante ,usuarioEstudiante, passEstudiante )">
+        Registro</ion-button>
+    </ion-list>
+  </form>
+
+  <ion-row>
+    <div>
+      <p class="texto1">Si ya esta registrado, por favor ingrese al <a (click)="formLogin()">
+        <strong>login</strong></a>.</p>
+    </div>
+    <br>
+  </ion-row>
+</ion-card-content>

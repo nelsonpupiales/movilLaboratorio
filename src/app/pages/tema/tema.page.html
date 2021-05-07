@@ -1,0 +1,27 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-back-button color=#ffffff></ion-back-button>      
+    </ion-buttons>    
+    <ion-buttons slot="primary" (click)="cargarDetalle()">
+      <ion-button color="#ffffff">
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="information-circle" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="titulo">
+      {{nombreMateria}}
+    </ion-title>  
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content> 
+  <p class="tema">Temas</p>
+  <p *ngFor="let tema of temas">
+    <ion-card class="card" routerLink="/detalles/{{tema.id}}">
+      <br>
+      <p>{{tema?.nombreTema}}</p>
+    </ion-card>
+  </p>
+</ion-content>

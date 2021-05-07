@@ -1,0 +1,95 @@
+ion-toolbar {
+    --color: #ffffff;
+    --background: #0d2c6c;
+}
+
+
+ion-content{
+    --background: #F2F3F5;
+}
+
+
+ion-card{
+    --background: #ffffff !important;   
+    /* border-bottom-left-radius: 1.3em; */
+    border-bottom: 2px solid  rgba(179,220,237,1); 
+    border-left: 2px solid  rgba(179,220,237,1);       
+}
+
+.titulo{
+    text-align: left;
+    font-size: 1.5em;
+}
+
+
+.saludo{
+    color: #ffffff;
+    text-align: right;
+    margin-right: 0.8em;
+}
+
+.botonSalida{
+    background: #f8f9fa;
+    color: #0d2c6c;
+    font-size: 2em;
+    padding: 5px;
+    width: 19px;
+    height: 19px;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 50%;
+    margin-right: 0.2em;
+    margin-top: 0.1em;
+}
+
+
+.cargar{
+    margin-bottom: 1%;            
+}
+
+
+.pie{
+    height: 3.7em;
+    text-align: center;
+    background:  #F2F3F5;
+}
+
+
+.botonpie{
+    background: #F2F3F5;
+    color:#0d2c6c;
+    font-size: 0.8em;
+}
+
+
+.card{
+    height: 5em;
+    text-align: center;
+    font-size: 1.2em;
+    color: #000000;       
+}
+
+
+ion-fab-button{
+    --background: #ffc409;
+}
+
+
+.bloque{
+    background-color: #0d2c6c;
+    color: #fafafa;
+    margin-top: -1em;
+    /*border-bottom-left-radius: 2.5em;
+    border-bottom-right-radius: 2.5em;*/
+    border-bottom: 4px solid  rgb(240, 226, 31);    
+}
+
+.tema{
+    text-align: center;
+}
+
+
+
+
+
+

@@ -1,0 +1,34 @@
+import { Injectable } from '@angular/core';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+
+import { DataApiService } from 'src/app/services/data-api.service';
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class LogoutGuard implements CanActivate {
+  constructor(private dataService: DataApiService, private router: Router){
+
+  }
+
+  canActivate() {
+
+    let token = this.dataService.getToken()
+    console.log("token -> ",token);
+
+    if(!token){
+      return true;
+    }else{
+      
+      this.router.navigate(['/materia']);
+      return false;
+
+    }
+   
+
+    
+  }
+  
+}
