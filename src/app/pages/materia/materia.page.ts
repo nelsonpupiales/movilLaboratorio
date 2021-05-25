@@ -84,6 +84,7 @@ export class MateriaPage implements OnInit {
         async materiaestudiante => {
           //Obtener la longitud del JSON
           let longitud = (Object.keys(materiaestudiante).length)
+          this.materias = []
 
           for (let i = 0; i < longitud; i++) {
             console.log(materiaestudiante[i].idMateria)
@@ -143,7 +144,6 @@ export class MateriaPage implements OnInit {
 
   //Salir de la pagina
   logout() {
-
     localStorage.clear();
     this.doRefreshLogin();
     this.router.navigate(['/home']);
@@ -169,10 +169,9 @@ export class MateriaPage implements OnInit {
   //Carga materia
   async cargaMateria(codigoMateria) {
     console.log(codigoMateria);
-    (await this.dataApi.cargarCodeMateria(codigoMateria))
-      .subscribe(
-        async materia => {
-
+    (await this.dataApi.cargarCodeMateria(codigoMateria))      
+      .subscribe(        
+        async (materia) => {
           if (materia == null) {
             const toast = await this.toastController.create({
               message: 'Codigo invalido',
@@ -180,14 +179,6 @@ export class MateriaPage implements OnInit {
               color: 'warning',
             });
             toast.present();
-          } else if (materia['codigoMateria'] == " ") {
-            const toast = await this.toastController.create({
-              message: 'Ya esta inscrito en ' + '<strong>' + materia['nombreMateria'] + '</strong>',
-              duration: 1500,
-              color: 'warning',
-            });
-            toast.present();
-
           } else {
             //Obtengo el id de la materia y el id del estudiante para volver a guardar en una tripleta
             const id = '';
@@ -201,14 +192,33 @@ export class MateriaPage implements OnInit {
               'idEstudiante': idEstudiante
             };
             console.log(materiaestudiante);
-            (await this.dataApi.guardarMateriaEstudiante(materiaestudiante))
-              .subscribe(
-                async data => {
-                  console.log(data)
-                });
+            (await this.dataApi.guardarMateriaEstudiante(materiaestudiante)).subscribe((respuesta)=> {
+              console.log('respuesta inscribir materia ', respuesta);
+              
+              
+
+              this.cargaListaMateria(idEstudiante)
+              
+            })
           }
         });
   }
+
+  //inscribir estudiante a materia... validando anteriormente que la materia existe
+  inscribirMateria(materiaEstudiante){
+    
+    this.dataApi.guardarMateriaEstudiante(materiaEstudiante)
+    .then(()=>{
+      console.log('inscripcion exitosa');
+      
+    })
+    .catch((error)=>{
+      console.log('error al inscrbir materia', error);
+      
+    })
+  }
+
+  
 
 
   async materia(id) {

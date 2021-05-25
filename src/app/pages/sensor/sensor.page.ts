@@ -23,6 +23,7 @@ export class SensorPage implements OnInit {
   // Para grafica
   @ViewChild("lineCanvas") private lineCanvas: ElementRef;
   lineChart: Chart;
+
   //---------------------------------------------------------------------------
 
   nombreExperimento = String;
@@ -44,14 +45,16 @@ export class SensorPage implements OnInit {
 
   ngAfterViewInit() {}
 
+  idExperimento
   ngOnInit(): void {
     const now = new Date();
     this.today = now.toISOString();
     console.log(this.d);
 
-    const idExperimento = this.router.snapshot.params["id"];
-    console.log("IdExperimento: " + idExperimento);
-    this.cargarUnExperimento(idExperimento);
+     this.idExperimento = this.router.snapshot.params["id"];
+    console.log("IdExperimento: " + this.idExperimento);
+    
+    this.cargarUnExperimento(); // cargar todo el experimento
 
     //Carga nombre del estudiante
     let idEstudiante = this.dataApi.cargaIdLS();
@@ -74,9 +77,7 @@ export class SensorPage implements OnInit {
       console.log("aun no se habia parado el reloj yo lo har[e ");
       
       this.stopTimer()
-
     }
- 
 }
 
   suscripctionCargarExperimento: Subscription
@@ -84,9 +85,15 @@ export class SensorPage implements OnInit {
 
   dataArrayStringToArray = []
   labelArrayStringToArray= []
-  async cargarUnExperimento(idExperimento) {
-    console.log(idExperimento);
-    this.suscripctionCargarExperimento = (await this.dataApi.cargarUnExperimento(idExperimento)).subscribe(
+  
+  
+  async cargarUnExperimento() {
+    console.log(this.idExperimento);
+    if(!this.idExperimento){
+      return
+    }
+
+    this.suscripctionCargarExperimento = (await this.dataApi.cargarUnExperimento(this.idExperimento)).subscribe(
       async (experimento) => {
         console.log(experimento);
         //this.idTema= tema['id'];
@@ -97,7 +104,7 @@ export class SensorPage implements OnInit {
         //console.log(experimento['labelExperimento'])
 
         //Convierte String a Array valores de x con -y a +y
-         this.dataArrayStringToArray = JSON.parse(
+        this.dataArrayStringToArray = JSON.parse(
           "[" + experimento["dataExperimento"] + "]"
         );
         console.log(
@@ -108,7 +115,7 @@ export class SensorPage implements OnInit {
         console.log("-> " + this.dataArrayStringToArray[2]);
 
         //Coviente a String a Array valores de Label
-         this.labelArrayStringToArray = JSON.parse(
+        this.labelArrayStringToArray = JSON.parse(
           "[" + experimento["labelExperimento"] + "]"
         );
         console.log(
@@ -116,7 +123,7 @@ export class SensorPage implements OnInit {
           this.labelArrayStringToArray
         );
 
-        this.temporizador()
+        //this.temporizador()
 
         /*
         for (var val of labelArrayStringToArray) {
@@ -201,15 +208,12 @@ export class SensorPage implements OnInit {
   reloj: ReturnType<typeof setTimeout>
   temporizador(){
     console.log('tamano de arreglo ->',this.arraydeprueba.length);
-    
     let timeConsulta = 2000
     let grupoDatos = 9
     this.reloj = setInterval(()=> this.actualizarChart(),timeConsulta);
     let tiempo = (this.dataArrayStringToArray.length/grupoDatos)*timeConsulta
     //let tiempo = ((this.arraydeprueba.length/grupoDatos)+1)*timeConsulta
-
     this.stopTimer(tiempo)
-    
   }
 
   stopTimer( tiempo?){
@@ -230,22 +234,22 @@ export class SensorPage implements OnInit {
   rangoIntervaloInicial = 0
   arraydeprueba= [1,2,4,3,5,7,4,3,2,5,6,7,9,8,7,5,4,3,1,4,5,7,4,3,3,5,6,7,8,3,3,3,5]
   actualizarChart(){
-      //inicializar la grafica con los primero N datos
-      //establecer un grupo finito de datos a mostrar
-      let intervalo = 1;
-     this.arrayIntervalo = this.dataArrayStringToArray.slice(this.rangoIntervaloInicial,this.rangoIntervaloInicial+intervalo)
+    //inicializar la grafica con los primero N datos
+    //establecer un grupo finito de datos a mostrar
+    let intervalo = 1;
+    this.arrayIntervalo = this.dataArrayStringToArray.slice(this.rangoIntervaloInicial,this.rangoIntervaloInicial+intervalo)
   //this.arrayIntervalo = this.arraydeprueba.slice(this.rangoIntervaloInicial,this.rangoIntervaloInicial+intervalo)
       
 
-     console.log('rango actual inicio ->' + this.rangoIntervaloInicial+ ' final -> '+intervalo);
-     console.log('datos -> ', this.arrayIntervalo);
-     if(this.rangoIntervaloInicial==0){
-       let labelfive = []
-       labelfive.push(this.labelArrayStringToArray[0])
-       labelfive.push(this.labelArrayStringToArray[1])
-       labelfive.push(this.labelArrayStringToArray[2])
-       labelfive.push(this.labelArrayStringToArray[3])
-       labelfive.push(this.labelArrayStringToArray[4])
+    console.log('rango actual inicio ->' + this.rangoIntervaloInicial+ ' final -> '+intervalo);
+    console.log('datos -> ', this.arrayIntervalo);
+    if(this.rangoIntervaloInicial==0){
+      let labelfive = []
+      labelfive.push(this.labelArrayStringToArray[0])
+      labelfive.push(this.labelArrayStringToArray[1])
+      labelfive.push(this.labelArrayStringToArray[2])
+      labelfive.push(this.labelArrayStringToArray[3])
+      labelfive.push(this.labelArrayStringToArray[4])
 
       this.lineChart = new Chart(this.lineCanvas.nativeElement, {
         type: "line",
@@ -279,8 +283,8 @@ export class SensorPage implements OnInit {
           ],
         },
       });
-     }else if(this.rangoIntervaloInicial<=9) {
-     
+      }else if(this.rangoIntervaloInicial<=9) {
+
       this.lineChart.data.datasets.forEach(dataset =>{
         this.arrayIntervalo.forEach(item =>{
           dataset.data.push(item)
@@ -288,9 +292,8 @@ export class SensorPage implements OnInit {
         })
       })
       this.lineChart.update()
-     }else{
+    }else{
       // console.log('entr[e a los 20 y debo borrar los primero 5');
-       
       //this.lineChart.data.datasets.splice(0,5)
       let contador = 1
 
@@ -299,7 +302,7 @@ export class SensorPage implements OnInit {
       console.log('tamano de labels -> ',this.lineChart.data.labels[this.lineChart.data.labels.length-1]);
       
      // this.lineChart.data.labels.shift(); // para borrar el primero 
-     let labelFinal = parseInt((this.lineChart.data.labels[this.lineChart.data.labels.length-1]).toString())
+    let labelFinal = parseInt((this.lineChart.data.labels[this.lineChart.data.labels.length-1]).toString())
 
       this.lineChart.data.labels.splice(0,1);// eliminar n datos desde una posicion
 
@@ -313,16 +316,14 @@ export class SensorPage implements OnInit {
             this.lineChart.data.labels.shift();
             this.lineChart.data.labels.push(labelFinal+1)
           }
-          contador++
-      
-        
+          contador++  
       })
       */
 
       this.lineChart.data.datasets.forEach(dataset =>{
 
         dataset.data.splice(0,1);
-       /* dataset.data.forEach(item=>{
+      /* dataset.data.forEach(item=>{
           if(contador <=1){
             dataset.data.shift()
           }
@@ -361,12 +362,7 @@ export class SensorPage implements OnInit {
     
      //fin del if
 
-    
-     
-     this.rangoIntervaloInicial += intervalo;
-
-
-     
+    this.rangoIntervaloInicial += intervalo;
 
 
   
